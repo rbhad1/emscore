@@ -42,7 +42,8 @@ class EMScorer:
         
         model, preprocess = clip.load("ViT-B/32", device=self.device)
         self._model = model
-        self._tokenizer = clip.tokenize
+        self._tokenizer = clip.tokenize(truncate=True)
+
         self._image_preprocess = preprocess
 
         ref_group_boundaries = None
