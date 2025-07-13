@@ -26,9 +26,6 @@ class EMScorer:
         else:
             self.device = device
     
-    def truncate_input(text, max_words=500): 
-        words = text.split()
-        return ' '.join(words[:max_words])
     
     def score(self, cands, refs, vids=None, verbose=True, batch_size=64, nthreads=4, idf=True, return_matched_idx=False):
         """
@@ -47,7 +44,7 @@ class EMScorer:
         model, preprocess = clip.load("ViT-B/32", device=self.device)
         self._model = model
         # self._tokenizer = clip.tokenize
-        self._tokenizer = lambda text: clip.tokenize([truncate_input(text)], truncate=True).to(self.device)
+        self._tokenizer = lambda text: clip.tokenize([text], truncate=True).to(self.device)
 
         self._image_preprocess = preprocess
 
